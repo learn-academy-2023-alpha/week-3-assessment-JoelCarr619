@@ -56,33 +56,66 @@ exportAllDeclaration(fibLength1Result).toEqual([0, 1, 1, 2, 3, 5, 8, 13, 21, 34]
 // create the object as an argument, take the values from the object using `object.values()`
 // Sort through the values from least to greatest using the `array.sort()` method that will return the sorted value.
 // Create an array as an arguement, return the array where each element is the sum of all elements before it in the input array.
- 
+
+const sortValues = (obj) => {
+  return object.values(obj).sort((a, b) => a - b);  
+}
 
 // a) Create a test with expect statements for each of the variables provided.
 
-const studyMinutesWeek1 = {
-  sunday: 90,
-  monday: 30,
-  tuesday: 20,
-  wednesday: 15,
-  thursday: 30,
-  friday: 15,
-  saturday: 60
-}
+// const studyMinutesWeek1 = {
+//   sunday: 90,
+//   monday: 30,
+//   tuesday: 20,
+//   wednesday: 15,
+//   thursday: 30,
+//   friday: 15,
+//   saturday: 60
+// }
 // Expected output: [15, 15, 20, 30, 30, 60, 90]
 
-const studyMinutesWeek2 = {
-  sunday: 100,
-  monday: 10,
-  tuesday: 45,
-  wednesday: 60,
-  thursday: 20,
-  friday: 15,
-  saturday: 65
-}
+// const studyMinutesWeek2 = {
+//   sunday: 100,
+//   monday: 10,
+//   tuesday: 45,
+//   wednesday: 60,
+//   thursday: 20,
+//   friday: 15,
+//   saturday: 65
+// }
 // Expected output: [10, 15, 20, 45, 60, 65, 100]
 
+describe("sortValues", () => {
+  const studyMinutesWeek1 = {
+    sunday: 90,
+    monday: 30,
+    tuesday: 20,
+    wednesday: 15,
+    thursday: 30,
+    friday: 15,
+    saturday: 60,
+  };
+  const studyMinutesWeek2 = {
+    sunday: 100,
+    monday: 10,
+    tuesday: 45,
+    wednesday: 60,
+    thursday: 20,
+    friday: 15,
+    saturday: 65,
+  };
+
 // b) Create the function that makes the test pass.
+
+  it("should return an array of values sorted from least to greatest for studyMinutesWeek1", () => {
+    expect(sortValues(studyMinutesWeek1)).toEqual([15, 15, 20, 30, 30, 60, 90]);
+  });
+
+  it("should return an array of values sorted from least to greatest for studyMinutesWeek2", () => {
+    expect(sortValues(studyMinutesWeek2)).toEqual([10, 15, 20, 45, 60, 65, 100]);
+  });
+});
+
 
 // --------------------3) Create a function that takes in an array and returns an array of the accumulating sum. An empty array should return an empty array.
 
