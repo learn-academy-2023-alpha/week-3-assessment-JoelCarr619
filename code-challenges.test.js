@@ -12,42 +12,45 @@
 
 // --------------------1) Create a function that takes in a number (greater than 2) and returns an array that length containing the numbers of the Fibonacci sequence.
 // Psuedo code:
-// First will have to take in a number ` ` and return an array of length ` ` containing the numbers of the fibonacci sequences
+// First will have to take in a number ` n` and return an array of length `n ` containing the numbers of the fibonacci sequences
 // I will also use the `for loop` method to generate the rest of the sequence by adding the last two numbers in the squesnce and pushing the sum onto the result array. 
 
-const fibonacciArray = (array) => {
-    if (array < 3) {
-      return new error(`number should be greater than or equal to 3`);
-    }
-} 
+const fibonacciArray = (n) => {
+  let fib = [1, 1];
+  for (let i = 2; i < n; i++) {
+    fib[i] = fib[i - 1] + fib[i - 2];
+  }
+  return fib;
+}
 
 
 // a) Create a test with expect statements for each of the variables provided.
 
-const fibLength1 = 6
+// const fibLength1 = 6
 // Expected output: [1, 1, 2, 3, 5, 8]
 
-const fibLength2 = 10
+// const fibLength2 = 10
 // Expected output: [1, 1, 2, 3, 5, 8, 13, 21, 34, 55]
 
+const fibLength1 = 6;
+const expectedFibonacciArray1 = [1, 1, 2, 3, 5, 8];
 
 
-const result = [0, 1]; 
-for(let i = 2; i < 0; i++) {
-  const a = result[i - 1];
-  const b = result[i - 2];
-  result.push(a + b);
-}
-return result;
+const fibLength2 = 10;
+const expectedFibonacciArray2 = [1, 1, 2, 3, 5, 8, 13, 21, 34, 55];
+
 
 // b) Create the function that makes the test pass.
 
-const fibLength1Result = fibonacciArray(6);
-exportAllDeclaration(fibLength1Result).toEqual([0, 1, 1, 2, 3, 5]);
+const fibArray1 = fibonacciArray(fibLength1);
+console.log(
+  JSON.stringify(fibArray1) === JSON.stringify(expectedFibonacciArray1)
+);
 
-const fibLength2Result = fibonacciArray(10);
-exportAllDeclaration(fibLength1Result).toEqual([0, 1, 1, 2, 3, 5, 8, 13, 21, 34])
-
+const fibArray2 = fibonacciArray(fibLength2);
+console.log(
+  JSON.stringify(fibArray2) === JSON.stringify(expectedFibonacciArray2)
+);
 
 // --------------------2) Create a function that takes in an object and returns an array of the values sorted from least to greatest.
 // Hint: Check out this resource: Object.values() https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_objects/Object/values
@@ -111,7 +114,7 @@ describe("sortValues", () => {
     expect(sortValues(studyMinutesWeek1)).toEqual([15, 15, 20, 30, 30, 60, 90]);
   });
 
-  it("should return an array of values sorted from least to greatest for studyMinutesWeek2", () => {
+  ("should return an array of values sorted from least to greatest for studyMinutesWeek2", () => {
     expect(sortValues(studyMinutesWeek2)).toEqual([10, 15, 20, 45, 60, 65, 100]);
   });
 });
@@ -124,25 +127,30 @@ describe("sortValues", () => {
 // Initializes a variable `sum` to ) and an empty array `result`
 // Using a `for loop` to iterate through each element of `arr` adding the current element to `sum` and pushes `sum` onto `result`returning the `result` array.
 
-const accumulatingSum = (arr) => {
-  let sum = 0;
-  const result = []; 
-  for (let i = 0;  i < arr.length; i++) {
-    sum += arr[i];
-    result.push(sum);
-  }
+const accumulateSum = (arr) => {
+  if (arr.length === 0) {
+    return []
 
+  }
+  let result = []
+  let sum = 0
+
+  for (let i = 0; i < arr.length; i+++) {
+    sum += arr[i]
+    result.push(sum)
+  }
+  return result 
 }
 
 // a) Create a test with expect statements for each of the variables provided.
 
-const accountTransactions1 = [100, -17, -23, -9]
+// const accountTransactions1 = [100, -17, -23, -9]
 // Expected output: [100, 83, 60, 51]
 
-const accountTransactions2 = [250, -89, 100, -96]
+// const accountTransactions2 = [250, -89, 100, -96]
 // Expected output: [250, 161, 261, 165]
 
-const accountTransactions3 = []
+// const accountTransactions3 = []
 // Expected output: []
 
 const accountTransactions1Result = accumulatingSum(accountTransactions1);
@@ -155,3 +163,21 @@ const accountTransactions3Result = accumulatingSum(accountTransactions3);
 exportAllDeclaration(accountTransactions3Result).toEqual([])
 
 // b) Create the function that makes the test pass.
+
+describe('accumulateSum', () => {
+  it('returns an empty array when given an empty array', () => {
+    expect(accumulateSum([])).toEqual([])
+  })
+
+  ('returns an array of the accumulating sum for accountTransactions1', () => {
+    expect(accumulateSum([100, -17, -23, -9])).toEqual([100, 83, 60, 51])
+  })
+
+  ('returns an array of the accumulating sum for accountTransactions2', () => {
+    expect(accumulateSum([250, -89, 100, -96])).toEqual([250, 161, 261, 165])
+  })
+})
+
+
+
+
